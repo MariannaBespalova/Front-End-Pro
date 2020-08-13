@@ -6,7 +6,7 @@
 function deepEqual(a, b) {
   if (a === b) {
     return true; // eсли два одинаковых объекта ссылаются на одну область памяти
-  } else if (typeof a !== "object" || typeof b !== "object") {
+  } else if (typeof a !== "object" && typeof b !== "object") {
     return a === b; // сравниваем примитивы
   } else if (Object.keys(a).length !== Object.keys(b).length) {
     return false; //проверяю количество свойств двух объектов
@@ -46,5 +46,6 @@ const b = {
     internals: [{ name: "Jack", salary: 1300 }],
   },
 };
-
-console.log(deepEqual(a, b));
+let c = 5;
+let d = 4;
+console.log(deepEqual(c, d));
