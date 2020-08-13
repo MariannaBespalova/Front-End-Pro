@@ -24,7 +24,7 @@ function deepEqual(a, b) {
 
 const a = {
   sales: [
-    { name: "Joh", salary: 1000 },
+    { name: "John", salary: 1000 },
     { name: "Alice", salary: 600 },
   ],
   development: {
