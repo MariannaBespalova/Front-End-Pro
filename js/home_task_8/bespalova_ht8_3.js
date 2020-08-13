@@ -8,7 +8,7 @@ function getNumberOfEven(n) {
   n = String(n);
   for (const digit of n) {
     if (digit % 2 === 0) {
-      sum += 1;
+      sum++;
     }
   }
   return sum;
