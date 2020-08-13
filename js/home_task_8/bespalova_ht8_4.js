@@ -12,6 +12,9 @@ function deepEqual(a, b) {
     return false; //проверяю количество свойств двух объектов
   }
   for (const key of Object.keys(a)) {
+    if (!(key in b)) {
+      return false;
+    }
     if (!deepEqual(a[key], b[key])) {
       return false;
     }
@@ -21,7 +24,7 @@ function deepEqual(a, b) {
 
 const a = {
   sales: [
-    { name: "John", salary: 1000 },
+    { name: "Joh", salary: 1000 },
     { name: "Alice", salary: 600 },
   ],
   development: {
@@ -46,6 +49,5 @@ const b = {
     internals: [{ name: "Jack", salary: 1300 }],
   },
 };
-let c = 5;
-let d = 4;
-console.log(deepEqual(c, d));
+
+console.log(deepEqual(a, b));
