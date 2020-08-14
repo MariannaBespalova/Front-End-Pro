@@ -12,7 +12,7 @@ function deepEqual(a, b) {
     return false; //проверяю количество свойств двух объектов
   }
   for (const key of Object.keys(a)) {
-    if (!(key in b)) {
+    if (Object.keys(a)[key] !== Object.keys(b)[key]) {
       return false;
     }
     if (!deepEqual(a[key], b[key])) {
