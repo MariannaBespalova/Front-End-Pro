@@ -3,7 +3,8 @@
 // суммирует переданный параметр с тем, что передали первый раз и так далее.
 // Всё это с замыканиями.
 
-function getSum(a = 0) {
+function getSum() {
+  let a = 0;
   return function (b) {
     return (a += b);
   };
