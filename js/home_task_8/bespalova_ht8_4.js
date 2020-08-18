@@ -8,9 +8,12 @@ function deepEqual(a, b) {
     return true; // eсли два одинаковых объекта ссылаются на одну область памяти
   } else if (typeof a !== "object" && typeof b !== "object") {
     return a === b; // сравниваем примитивы
+  } else if (a.length !== b.length) {
+    return false; //проверяю количество свойств двух массивов
   } else if (Object.keys(a).length !== Object.keys(b).length) {
     return false; //проверяю количество свойств двух объектов
   }
+
   for (const key of Object.keys(a)) {
     if (!(key in b)) {
       return false;
