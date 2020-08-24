@@ -25,3 +25,13 @@ function countLettersOfString2(str) {
   }
   return result;
 }
+
+function calcEachLetter3(str) {
+  const newObject = {};
+  for (let i = 0; i < str.length; i++) {
+    const key = str[i];
+    newObject[key] =
+      newObject[key] === undefined ? (newObject[key] = 1) : newObject[key] + 1;
+  }
+  return newObject;
+}
