@@ -22,7 +22,7 @@ function deepEqual(a, b) {
   return true;
 }
 
-const a = {
+const obj1 = {
   sales: [
     { name: "John", salary: 1000 },
     { name: "Alice", salary: 600 },
@@ -36,7 +36,7 @@ const a = {
   },
 };
 
-const b = {
+const obj2 = {
   sales: [
     { name: "John", salary: 1000 },
     { name: "Alice", salary: 600 },
@@ -50,4 +50,36 @@ const b = {
   },
 };
 
-console.log(deepEqual(a, b));
+console.log(deepEqual(obj1, obj2));
+
+function isObject(a) {
+  return typeof a === "object" && a !== null && !Array.isArray(a);
+}
+
+function isEqual(a, b) {
+  if (isObject(a) && isObject(b)) {
+    if (Object.keys(a).length !== Object.keys(b).length) {
+      return false;
+    }
+    for (const key in a) {
+      if (!isEqual(a[key], b[key])) {
+        return false;
+      }
+    }
+  } else if (Array.isArray(a) && Array.isArray(b)) {
+    if (a.length !== b.length) {
+      return false;
+    }
+    for (let i = 0; i < a.length; i++) {
+      if (!isEqual(a[i], b[i])) {
+        return false;
+      }
+    }
+  } else {
+    return a === b;
+  }
+  return true;
+}
+
+const result = isEqual(obj1, obj2);
+console.log(result);
