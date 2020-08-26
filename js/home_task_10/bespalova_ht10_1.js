@@ -11,14 +11,14 @@ function allTagsQuantity() {
   const allTags = document.querySelectorAll("#wrapper *");
   const pTags = document.querySelectorAll("#wrapper p");
   const spanTags = document.querySelectorAll("#wrapper span");
-  let result = document.querySelector("#result");
+  const result = document.querySelector("#result");
 
   if (wrapper === null || result === null) return;
 
   let sumOfStrings = 0;
   let sumOfNumbers = 0;
   for (const tag of allTags) {
-    let text = tag.innerText;
+    const text = tag.innerText;
     Number.isNaN(+text) ? sumOfStrings++ : sumOfNumbers++;
   }
 
