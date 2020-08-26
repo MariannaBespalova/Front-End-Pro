@@ -3,13 +3,14 @@
 // суммирует переданный параметр с тем, что передали первый раз и так далее.
 // Всё это с замыканиями.
 
-function getSum(a) {
+function getSum() {
+  let a = 0;
   return function (b) {
     return (a += b);
   };
 }
 
-const sum = getSum(0);
+const sum = getSum();
 console.log(sum(3));
 console.log(sum(5));
 console.log(sum(20));
