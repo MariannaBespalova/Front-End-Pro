@@ -32,3 +32,52 @@ function allTagsQuantity() {
 if (button !== null) {
   button.addEventListener("click", allTagsQuantity);
 }
+
+function isString(x) {
+  return Number.isNaN(+x);
+}
+
+const button = document.querySelector("button");
+if (button !== null) {
+  button.addEventListener("click", function () {
+    const elements = document.querySelectorAll("#app span");
+
+    // let numbers = 0;
+    // let words = 0;
+
+    // elements.forEach(element => {
+    //     if (isString(element.innerHTML)) {
+    //         words++;
+    //     } else {
+    //         numbers++;
+    //     }
+    // });
+
+    // console.log(elements, numbers, words);
+
+    const result = Array.from(elements)
+      .map((elem) => elem.innerHTML)
+      .reduce(
+        (acc, value) => {
+          // if (isString(value)) {
+          //     acc.words++;
+          // } else {
+          //     acc.numbers++;
+          // }
+
+          // return acc;
+          isString(value) ? acc.words++ : acc.numbers++;
+          return acc;
+          // const isValueString = isString(value);
+
+          // acc.words = isValueString ? acc.words + 1 : acc.words;
+          // acc.numbers = !isValueString ? acc.numbers + 1 : acc.numbers;
+
+          // return acc;
+        },
+        { numbers: 0, words: 0 }
+      );
+
+    console.log(result);
+  });
+}
