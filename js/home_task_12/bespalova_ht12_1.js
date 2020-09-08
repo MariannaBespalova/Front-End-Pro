@@ -91,7 +91,7 @@ let selectedLi;
 
 for (const listItem of listItems) {
   listItem.addEventListener("click", (event) => {
-    if (selectedLi) {
+    if (selectedLi !== undefined) {
       selectedLi.classList.remove("red");
     }
     selectedLi = event.target;
