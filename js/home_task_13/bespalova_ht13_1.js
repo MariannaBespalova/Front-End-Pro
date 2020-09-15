@@ -8,20 +8,16 @@ const button = document.querySelector(".submitBtn");
 const inputEmail = document.querySelector("input[name='E-mail']");
 const inputPassword = document.querySelector("input[name='password']");
 
-button.removeAttribute("disabled");
-
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-
-  let reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+  
   const inputEmailValue = inputEmail.value;
-
   const inputPasswordValue = inputPassword.value;
 
-  if (!reg.test(inputEmailValue)) {
+  if (!isValidEmail(inputEmailValue)) {
     inputEmail.style.backgroundColor = "red";
     button.disabled = "disabled";
-  } else if (reg.test(inputEmailValue)) {
+  } else if (isValidEmail(inputEmailValue)) {
     inputEmail.style.backgroundColor = "white";
   }
 
@@ -32,7 +28,7 @@ form.addEventListener("submit", (event) => {
     inputPassword.style.backgroundColor = "white";
   }
 
-  if (!isValidPassword(inputPasswordValue) || !reg.test(inputEmailValue)) {
+  if (!isValidPassword(inputPasswordValue) || !isValidEmail(inputEmailValue)) {
     return false;
   }
 
@@ -85,4 +81,9 @@ function isValidPassword(passwordValue) {
   } else {
     return true;
   }
+}
+
+function isValidEmail(email) {
+  let reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+  return reg.test(email);
 }
