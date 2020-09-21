@@ -8,15 +8,18 @@ function Unit(type, health, maxHealth, maxDistance) {
 Unit.prototype.isReadyToMove = function (distance) {
   return distance <= this.maxDistance;
 };
+
 Unit.prototype.isReadyToFight = function () {
   return this.health >= this.maxHealth / 2;
 };
+
 Unit.prototype.restore = function () {
   if (this.injures > 0) {
     this.health = this.maxHealth;
   }
   return this.health;
 };
+
 Unit.prototype.clone = function () {
   let cloneUnit = new Unit();
   cloneUnit = Object.create(
@@ -46,19 +49,17 @@ Army.prototype.restore = function () {
     }
   }
 };
+
 Army.prototype.getReadyToMoveUnits = function (distance) {
-  const result = [];
-  for (const unit of this.units) {
-    if (unit.isReadyToMove(distance)) {
-      result.push(unit);
-    }
-  }
-  return result;
+  return this.units.filter(unit => unit.isReadyToMove(distance))
 };
+
 Army.prototype.combineUnits = function (newArmy) {
   this.units = this.units.concat(newArmy);
 };
+
 Army.prototype.cloneUnit = function (unitNumber) {
+  if (unitNumber > this.units.length - 1 || unitNumber < 0) return false;
   if (unitNumber < this.units.length) {
     return this.units[unitNumber].clone();
   }
