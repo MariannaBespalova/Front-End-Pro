@@ -1,23 +1,17 @@
 
+const clock = document.querySelector(".wrapper");
 
-// let date = new Date()
+for (let i = 0; i < 8; i++) {
+  const divs = document.createElement("div");
+  clock.appendChild(divs);
+}
 
-// let dateStr = date.toJSON()
+const colors = ["blue", "yellow", "green", "red", "purple", "pink", "orange", "grey"];
+const divsForDigit = document.querySelectorAll(".wrapper div");
 
-// console.log(dateStr, typeof dateStr)
-
-// date.setHours
-// console.log(date)
-
-// var date = new Date();
-
-// var options = {
-//   hour: 'numeric',
-//   minute: 'numeric',
-//   second: 'numeric'
-// };
-
-// console.log(date.toLocaleString("ru", options)); // среда, 31 декабря 2014 г. н.э. 12:30:00
+for (let i = 0; i < divsForDigit.length; i++) {
+  divsForDigit[i].style.color = colors[i];
+}
 
 function myClock() {
   let date = new Date();
@@ -26,47 +20,28 @@ function myClock() {
   let hours = date.getHours();
 
   if (hours < 10) {
-    hours = `0${hours}`
+    hours = `0${hours}`;
   }
   if (min < 10) {
-    min = `0${min}`
+    min = `0${min}`;
   }
   if (sec < 10) {
-    sec = `0${sec}`
+    sec = `0${sec}`;
   }
 
-  let formatClock = `${hours} : ${min} : ${sec}`
-  let clock = document.querySelector("body");
-  clock.innerHTML = formatClock
-  console.clear()
-  console.log(formatClock);
+  const formatClock = `${hours}:${min}:${sec}`;
+  
+  let arrOfDigits = formatClock.split('');
+  console.log(arrOfDigits);
 
+  for (let i = 0; i < arrOfDigits.length; i++) {
+    divsForDigit[i].innerHTML = arrOfDigits[i];
+  }
+
+  console.clear();
+  console.log(formatClock);
 }
 
-// function initClock() {
-//   let time;
-//   time = setInterval(myClock, 1000);
-// }
-
-
-
-// function curHour() {
-//   var date = new Date();
-//   let dateStr = date.toTimeString()
-//   let clock = dateStr.slice(0, 8)
-
-//   let body = document.querySelector("body");
-//   body.innerHTML = clock;
-// }
-
-// function curHourCons() {
-//   var date = new Date();
-//   let dateStr = date.toTimeString()
-//   let clock = dateStr.slice(0, 8)
-//   console.clear()
-//   console.log(clock);
-
-// }
 
 function time(functime) {
   let start;
@@ -74,9 +49,5 @@ function time(functime) {
   functime();
 }
 
-
 time(myClock);
-
-
-
 
