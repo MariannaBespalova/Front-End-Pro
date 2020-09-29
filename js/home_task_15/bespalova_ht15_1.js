@@ -99,19 +99,6 @@ function timeReverse() {
 }
 
 
-function createButton(props) {
-	const text = props.text || "";
-	const className = props.className || "";
-
-	const button = document.createElement("button");
-
-	button.type = "button";
-	button.innerHTML = text;
-	button.className = className;
-
-	return button;
-}
-
 function createDiv(props) {
 	const text = props.text || "";
 	const className = props.className || "";
