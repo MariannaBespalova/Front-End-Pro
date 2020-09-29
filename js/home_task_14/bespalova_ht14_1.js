@@ -59,11 +59,12 @@ Army.prototype.combineUnits = function (newArmy) {
 };
 
 Army.prototype.cloneUnit = function (unitNumber) {
-  if (unitNumber > this.units.length - 1 || unitNumber < 0) return false;
-  if (unitNumber < this.units.length) {
-    return this.units[unitNumber].clone();
+  const unit = this.units[unitNumber];
+  if (unit !== undefined) {
+    return unit.clone();
   }
 };
+
 
 
 const myArmy = [
