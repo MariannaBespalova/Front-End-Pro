@@ -1,71 +1,60 @@
 const wrapper = document.querySelector(".wrapper");
 if (wrapper !== null) {
-	const dropdown = createDiv({ className: "dropdown" });
-	const dropButton = createButton({ text: "Choose clock format", className: "dropbtn" });
-	const dropdownContent = createDiv({ className: "dropdown-content" });
+	const dropdown = createSelect({ name: "time-format", className: "time-select" });
 	const clock = createDiv({ className: "clock" });
 
+
 	const arrOfFormats = [localTime, timeAmPm, timeReverse];
-	const arrOfHref = ["localTime", "timeAmPm", "timeReverse"];
-	const nameforLinks = ["Local Time", "Time AM/PM", "Time Reverse"];
+	const nameforOptions = ["Local Time", "Time AM/PM", "Time Reverse"];
 
-	for (let i = 0; i < arrOfFormats.length; i++) {
-		let links = createLink({ href: `#${arrOfHref[i]}`, text: nameforLinks[i], className: "format-clock" })
-		dropdownContent.appendChild(links);
-	}
-	const links = dropdownContent.children
-
-	dropButton.addEventListener("click", () => {
-		dropdownContent.classList.toggle("show");
-	})
-	window.onclick = function (event) {
-		if (!event.target.matches('.dropbtn')) {
-			if (dropdownContent.classList.contains('show')) {
-				dropdownContent.classList.remove('show');
-			}
-		}
+	for (let i = 0; i < nameforOptions.length; i++) {
+		let option = createOption({ text: nameforOptions[i], className: "format-clock" })
+		dropdown.appendChild(option);
 	}
 
 	let selectedLink;
-	for (let i = 0; i < arrOfFormats.length; i++) {
-		let functionName = arrOfFormats[i];
-		console.log(links[i])
-		links[i].addEventListener('click', () => {
-			if (selectedLink !== undefined) {
-				clearInterval(selectedLink)
-			}
-			selectedLink = setInterval(() => {
-				showFormat(functionName());
-			}, 1000)
-		})
+	dropdown.addEventListener("change", () => {
+		setTimer()
+	})
+	setTimer();
+
+	function setTimer() {
+		clearInterval(selectedLink);
+		showFormat(setFormat(dropdown.value));
+
+		selectedLink = setInterval(() => {
+			showFormat(setFormat(dropdown.value));
+		}, 1000)
 	}
 
 	function showFormat(clockFormat) {
 		console.clear();
 		console.log(clockFormat)
 		clock.innerHTML = "";
-
-		for (let i = 0; i < clockFormat.length; i++) {
-			const divs = document.createElement("div");
-			clock.appendChild(divs);
-		}
-
-		const divsForDigit = document.querySelectorAll(".clock div");
-		for (let i = 0; i < clockFormat.length; i++) {
-			divsForDigit[i].innerHTML = clockFormat[i];
-		}
-
 		const colors = ["blue", "yellow", "green", "red", "purple", "pink", "orange", "grey"];
-		for (let i = 0; i < divsForDigit.length; i++) {
-			divsForDigit[i].style.color = colors[i];
+
+		for (let i = 0; i < clockFormat.length; i++) {
+			const div = createDiv({ text: clockFormat[i] });
+			div.style.color = colors[i]
+			clock.appendChild(div);
 		}
 	}
 
+	function setFormat(string) {
+		for (let i = 0; i < nameforOptions.length; i++) {
+			if (string === nameforOptions[i]) {
+				return arrOfFormats[i]();
+			}
+		}
+		return undefined;
+	};
+
 	wrapper.appendChild(dropdown);
 	wrapper.appendChild(clock);
-	dropdown.appendChild(dropButton);
-	dropdown.appendChild(dropdownContent);
 }
+
+
+
 
 function localTime() {
 	let currentTime = new Date();
@@ -135,16 +124,28 @@ function createDiv(props) {
 	return div;
 }
 
-function createLink(props) {
+function createOption(props) {
 	const text = props.text || "";
 	const className = props.className || "";
-	const href = props.href || "";
+	const disabled = props.disabled || false;
 
-	const link = document.createElement("a");
+	const option = document.createElement("option");
 
-	link.innerHTML = text;
-	link.className = className;
-	link.href = href;
+	option.innerHTML = text;
+	option.className = className;
+	option.disabled = disabled;
 
-	return link;
+	return option;
+}
+
+function createSelect(props) {
+	const name = props.name || "";
+	const className = props.className || "";
+
+	const select = document.createElement("select");
+
+	select.name = name;
+	select.className = className;
+
+	return select;
 }
