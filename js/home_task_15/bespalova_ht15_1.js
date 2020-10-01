@@ -7,8 +7,8 @@ if (wrapper !== null) {
 	const arrOfFormats = [localTime, timeAmPm, timeReverse];
 	const nameforOptions = ["Local Time", "Time AM/PM", "Time Reverse"];
 
-	for (let i = 0; i < nameforOptions.length; i++) {
-		let option = createOption({ text: nameforOptions[i], className: "format-clock" })
+	for (const item of nameforOptions) {
+		let option = createOption({ text: item, className: "format-clock" })
 		dropdown.appendChild(option);
 	}
 
