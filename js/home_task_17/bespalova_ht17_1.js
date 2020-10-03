@@ -1,24 +1,25 @@
 const wrapper = document.querySelector("#wrapper");
 
-let usersArray = [];
+const KEY = "user"
 
-try {
-  getUsersFromLocalStorage()
-} catch (error) {
-  console.error("You have got an error in getUsersFromLocalStorage() function", error)
-}
+let usersArray = getUsersFromLocalStorage() || [];
 
 
 function saveUsersToLocalStorage() {
   const usersInfo = document.querySelectorAll(".list li span");
   const usersInfoArray = Array.from(usersInfo).map(element => element.innerText)
   const usersToJSON = JSON.stringify(usersInfoArray)
-  localStorage.setItem("user", usersToJSON);
+  localStorage.setItem(KEY, usersToJSON);
 }
 
 function getUsersFromLocalStorage() {
-  usersArray = JSON.parse(localStorage.getItem("user"))
+  try {
+    return JSON.parse(localStorage.getItem(KEY));
+  } catch (e) {
+    return [];
+  }
 }
+
 
 if (wrapper !== null) {
 
@@ -41,6 +42,7 @@ if (wrapper !== null) {
   wrapper.appendChild(form);
   wrapper.appendChild(list);
 }
+
 
 
 
