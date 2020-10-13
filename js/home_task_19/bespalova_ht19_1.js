@@ -114,7 +114,11 @@ class AjaxList extends List {
 
     fetch(`${this.baseUrl}?${searchParams}`)
       .then(response => {
+        if (response.status === 200) {
           return response.json();
+        } else {
+          throw new Error ("Error loading data")
+        }   
       })
       .then(result => {
         this.data = {
