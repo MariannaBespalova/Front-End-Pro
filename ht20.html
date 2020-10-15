@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .message_container {
+      height: 80vh;
+      font-size: 18px;
+      font-weight: normal;
+      max-width: 650px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      overflow: auto;
+
+    }
+
+    p {
+      max-width: 300px;
+      word-wrap: break-word;
+      margin: 2px 30px;
+      line-height: 18px;
+      position: relative;
+      padding: 10px 20px;
+      border-radius: 25px;
+    }
+
+    p:before,
+    p:after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      height: 20px;
+    }
+
+
+    .input_container {
+      margin-top: 20px;
+    }
+
+    input {
+      margin-left: 50px;
+      width: 560px;
+      padding: 12px;
+
+    }
+
+    .btn {
+      height: 42px;
+    }
+
+    .user_message {
+      color: white;
+      background: #0B93F6;
+      align-self: flex-end;
+    }
+
+    .user_message::before {
+      right: -7px;
+      border-right: 20px solid #0B93F6;
+      border-bottom-left-radius: 16px 14px;
+      transform: translate(0, -2px);
+    }
+
+    .user_message:after {
+      right: -56px;
+      width: 26px;
+      background: white;
+      border-bottom-left-radius: 10px;
+      transform: translate(-30px, -2px);
+    }
+
+    .server_message {
+      background: #E5E5EA;
+      color: black;
+    }
+
+    .server_message:before {
+      left: -7px;
+      border-left: 20px solid #E5E5EA;
+      border-bottom-right-radius: 16px 14px;
+      transform: translate(0, -2px);
+    }
+
+    .server_message:after {
+      left: 4px;
+      width: 26px;
+      background: white;
+      border-bottom-right-radius: 10px;
+      transform: translate(-30px, -2px);
+    }
+
+    .input_container {
+      padding-top: 30px;
+      border-top: 1px solid black;
+      width: 700px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<div class="wrapper">
+  <div class="message_container">
+
+    <div id="str"></div>
+  </div>
+
+  <div class="input_container">
+    <input class="input" type="text" placeholder="Введите ваше сообщение">
+
+    <button class="btn">SEND</button>
+  </div>
+
+</div>
+
+<body>
+  <script src="js/home_task_20/bespalova_ht20_1.js"></script>
+</body>
+
+</html>
